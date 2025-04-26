@@ -1,0 +1,8 @@
+.layout .sidebar {
+  height: calc(100vh - 46px);
+  width: 250px;
+  position: fixed;
+  top: 46px;
+  left:0;
+  
+}
