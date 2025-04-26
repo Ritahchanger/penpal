@@ -10,8 +10,8 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="h-[46px] shadow-md fixed w-full top-0 bg-green-600 text-white z-50">
-        <div className="flex items-center justify-between h-full px-4 md:px-6 max-w-7xl mx-auto">
+      <header className="h-[46px] shadow-md fixed w-full top-0 bg-(background:--red) text-white z-50">
+        <div className="flex items-center justify-between h-full px-4 md:px-6  mx-auto">
           {/* Left section - Logo and menu toggle */}
           <div className="flex items-center space-x-4">
             <button

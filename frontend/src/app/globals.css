@@ -4,22 +4,33 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --red: rgba(239, 28, 35);
+  --light-gray: rgb(242, 242, 242);
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 @layer base {
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
   }
+}
+body {
+  font-family: "Outfit", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 2px;
+}
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+  background: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff8c00;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .container {

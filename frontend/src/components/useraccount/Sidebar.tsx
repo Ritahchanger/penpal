@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`fixed left-0 sidebar  h-full w-64 bg-green-400 text-white shadow-md ${
+      className={`fixed left-0 sidebar  h-full w-64 bg-(background:--red) text-white shadow-md ${
         isOpen ? "block" : "hidden"
       }`}
     >
@@ -23,10 +23,12 @@ const Sidebar = () => {
             <li key={index}>
               <Link
                 href={item.href}
-                className="flex items-center p-3 rounded-sm hover:bg-gray-100 transition-colors text-gray-700 hover:text-blue-600 text-sm"
+                className="flex items-center p-3 rounded-sm hover:bg-gray-100 transition-colors text-white  text-sm hover:text-(color:--red)  "
               >
-                <span className="mr-3 text-gray-500">{item.icon}</span>
-                <span className="font-medium">{item.label}</span>
+                <span className="mr-3 text-sm font-semibold">{item.icon}</span>
+                <span className="font-medium  text-xs font-semibold">
+                  {item.label}
+                </span>
               </Link>
             </li>
           ))}

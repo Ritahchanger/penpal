@@ -1,153 +1,170 @@
+"use client";
+
 import React from "react";
 
-const Page = () => {
-  // Dummy data
-  const orders = [
-    {
-      id: "ORD-001",
-      paperDetails: "Research Paper on AI Ethics",
-      pages: 10,
-      words: 3500,
-      charges: "$120.00",
-      timeAssigned: "2023-05-15 10:30",
-      deadline: "2023-05-20 18:00",
-      penalty: "$15/day",
-      status: "In Progress",
-    },
-    {
-      id: "ORD-002",
-      paperDetails: "Case Study on Market Analysis",
-      pages: 6,
-      words: 2100,
-      charges: "$85.50",
-      timeAssigned: "2023-05-16 14:15",
-      deadline: "2023-05-19 12:00",
-      penalty: "$10/day",
-      status: "Pending Review",
-    },
-    {
-      id: "ORD-003",
-      paperDetails: "Literature Review on Climate Change",
-      pages: 8,
-      words: 2800,
-      charges: "$102.00",
-      timeAssigned: "2023-05-17 09:45",
-      deadline: "2023-05-21 23:59",
-      penalty: "$12/day",
-      status: "Completed",
-    },
-    {
-      id: "ORD-004",
-      paperDetails: "Business Proposal Template",
-      pages: 5,
-      words: 1750,
-      charges: "$75.25",
-      timeAssigned: "2023-05-18 16:20",
-      deadline: "2023-05-22 14:00",
-      penalty: "$8/day",
-      status: "In Progress",
-    },
-  ];
+import {
+  Eye,
+  Download,
+  Upload,
+  Filter,
+  FileDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
+import { useRouter } from "next/navigation";
+
+import { orders } from "@/components/userDashboard/SampleOrders";
+
+import Loader from "@/components/userDashboard/Loader";
+
+const Page = () => {
+  const router = useRouter();
   return (
     <div className="p-6 bg-white rounded-lg shadow-sm">
-      <div className="mb-4 flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-800">Completed Orders</h2>
-        <div className="flex space-x-2">
-          <button className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors">
+      <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800">
+            Completed Orders
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            Review your successfully completed orders
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
+            <FileDown size={16} />
             Export
           </button>
-          <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50 transition-colors">
+          <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors">
+            <Filter size={16} />
             Filter
           </button>
         </div>
       </div>
 
       <div className="overflow-x-auto border border-gray-200 rounded-lg">
+
         <table className="min-w-full divide-y divide-gray-200">
+
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Id
+                Order ID
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Paper Details
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Pages
+                Details
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Words
+                Timeline
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Charges
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Assigned
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Deadline
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
+                Rating
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
+
           </thead>
+          
           <tbody className="bg-white divide-y divide-gray-200">
             {orders.map((order) => (
               <tr key={order.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
-                  {order.id}
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm font-medium text-blue-600">
+                    {order.id}
+                  </div>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-900 max-w-xs">
-                  {order.paperDetails}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.pages}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.words.toLocaleString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {order.charges}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.timeAssigned}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <span
-                    className={
-                      new Date(order.deadline) < new Date()
-                        ? "text-red-600"
-                        : ""
-                    }
-                  >
-                    {order.deadline}
-                  </span>
+                <td className="px-6 py-4">
+                  <div className="text-sm font-medium text-gray-900">
+                    {order.paperDetails}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    {order.pages} pages • {order.words.toLocaleString()} words
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 py-1 text-xs rounded-full ${
+                  <div className="text-sm text-gray-900 font-medium">
+                    {order.charges}
+                  </div>
+                  <div
+                    className={`text-xs mt-1 px-2 py-1 inline-flex rounded-full ${
                       order.status === "Completed"
                         ? "bg-green-100 text-green-800"
-                        : order.status === "In Progress"
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-yellow-100 text-yellow-800"
+                        : ""
                     }`}
                   >
                     {order.status}
-                  </span>
+                  </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button className="text-blue-600 hover:text-blue-900 mr-3">
-                    Download
-                  </button>
-                  <button className="text-green-600 hover:text-green-900">
-                    Submit
-                  </button>
+                <td className="px-6 py-4">
+                  <div className="text-sm text-gray-500">
+                    <div>Assigned: {order.timeAssigned}</div>
+                    <div>Completed: {order.timeCompleted}</div>
+                    <div
+                      className={
+                        new Date(order.deadline) < new Date(order.timeCompleted)
+                          ? "text-red-600"
+                          : "text-green-600"
+                      }
+                    >
+                      Deadline: {order.deadline}
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className={`w-4 h-4 ${
+                            i < Math.floor(order.rating)
+                              ? "text-yellow-400"
+                              : "text-gray-300"
+                          }`}
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="ml-1 text-xs text-gray-500">
+                      ({order.rating})
+                    </span>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() =>
+                        router.push(
+                          `/user/dashboard/orders/completed/${order.id}`
+                        )
+                      }
+                      className="text-gray-600 hover:text-blue-600 transition-colors"
+                      title="View details"
+                    >
+                      <Eye size={18} />
+                    </button>
+                    <button
+                      className="text-gray-600 hover:text-green-600 transition-colors"
+                      title="Download files"
+                    >
+                      <Download size={18} />
+                    </button>
+                    <button
+                      className="text-gray-600 hover:text-purple-600 transition-colors"
+                      title="Submit revision"
+                    >
+                      <Upload size={18} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -155,25 +172,30 @@ const Page = () => {
         </table>
       </div>
 
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-sm text-gray-500">
-          Showing 1 to {orders.length} of {orders.length} entries
+          Showing <span className="font-medium">1</span> to{" "}
+          <span className="font-medium">{orders.length}</span> of{" "}
+          <span className="font-medium">{orders.length}</span> results
         </div>
-        <div className="flex space-x-2">
+        <div className="flex items-center gap-2">
           <button
-            className="px-3 py-1 border rounded text-sm disabled:opacity-50"
+            className="px-3 py-1 border rounded-md text-sm flex items-center gap-1 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled
           >
+            <ChevronLeft size={16} />
             Previous
           </button>
-          <button className="px-3 py-1 border rounded text-sm bg-blue-600 text-white">
+          <button className="px-3 py-1 border border-neutral-300 rounded-md text-sm bg-blue-600 text-white">
             1
           </button>
-          <button className="px-3 py-1 border rounded text-sm hover:bg-gray-50">
+          <button className="px-3 py-1 border border-neutral-300 rounded-md text-sm flex items-center gap-1 hover:bg-gray-50">
             Next
+            <ChevronRight size={16} />
           </button>
         </div>
       </div>
+      <Loader />
     </div>
   );
 };
