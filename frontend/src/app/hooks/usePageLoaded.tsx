@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export function usePageLoad() {
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     setIsLoading(false);
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   useEffect(() => {
     const handleLoad = () => setIsLoading(false);
