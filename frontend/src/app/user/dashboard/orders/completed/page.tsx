@@ -16,8 +16,6 @@ import { useRouter } from "next/navigation";
 
 import { orders } from "@/components/userDashboard/SampleOrders";
 
-import Loader from "@/components/userDashboard/Loader";
-
 const Page = () => {
   const router = useRouter();
   return (
@@ -44,9 +42,7 @@ const Page = () => {
       </div>
 
       <div className="overflow-x-auto border border-gray-200 rounded-lg">
-
         <table className="min-w-full divide-y divide-gray-200">
-
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -68,9 +64,8 @@ const Page = () => {
                 Actions
               </th>
             </tr>
-
           </thead>
-          
+
           <tbody className="bg-white divide-y divide-gray-200">
             {orders.map((order) => (
               <tr key={order.id} className="hover:bg-gray-50">
@@ -143,9 +138,7 @@ const Page = () => {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() =>
-                        router.push(
-                          `/user/dashboard/orders/completed/${order.id}`
-                        )
+                        router.push(`/user/dashboard/orders/${order.id}`)
                       }
                       className="text-gray-600 hover:text-blue-600 transition-colors"
                       title="View details"
@@ -195,7 +188,6 @@ const Page = () => {
           </button>
         </div>
       </div>
-      <Loader />
     </div>
   );
 };

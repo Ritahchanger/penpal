@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import "./Navbar.css";
 
+import {Sun,Moon} from "lucide-react"
+
 const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 h-[46px] bg-white dark:bg-[#111] shadow-md z-50 navbar">

@@ -1,24 +1,35 @@
 "use client";
 
 import { useState } from "react";
+
 import { Eye, EyeOff, Github, Mail, Lock, Key } from "lucide-react";
+
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
+
+
   const [showPassword, setShowPassword] = useState(false);
+
 
   const [isLoading, setIsLoading] = useState(false);
 
+
   const router = useRouter();
 
+
   const handleSubmit = (e: React.FormEvent) => {
+
+
     e.preventDefault();
+
 
     setIsLoading(true);
 
-    // Handle login logic here
+    
+
   };
 
   const handleLogin = () => {
@@ -27,13 +38,8 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Welcome back
-          </h1>
-          <p className="text-gray-500">Sign in to your account to continue</p>
-        </div>
+      <div className="bg-white rounded-sm shadow-sm border border-gray-200 p-8 w-full max-w-md">
+        <div className="text-center mb-8"></div>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Email Field */}
