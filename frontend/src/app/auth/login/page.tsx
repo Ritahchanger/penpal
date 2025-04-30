@@ -1,35 +1,18 @@
 "use client";
 
 import { useState } from "react";
-
-import { Eye, EyeOff, Github, Mail, Lock, Key } from "lucide-react";
-
+import { Eye, EyeOff, Github, Mail, Lock } from "lucide-react";
 import Link from "next/link";
-
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-
-
   const [showPassword, setShowPassword] = useState(false);
-
-
   const [isLoading, setIsLoading] = useState(false);
-
-
   const router = useRouter();
 
-
   const handleSubmit = (e: React.FormEvent) => {
-
-
     e.preventDefault();
-
-
     setIsLoading(true);
-
-    
-
   };
 
   const handleLogin = () => {
@@ -37,7 +20,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-red-50 px-4">
       <div className="bg-white rounded-sm shadow-sm border border-gray-200 p-8 w-full max-w-md">
         <div className="text-center mb-8"></div>
 
@@ -60,7 +43,7 @@ const LoginPage = () => {
                 type="email"
                 autoComplete="email"
                 placeholder="your@email.com"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                 required
               />
             </div>
@@ -77,7 +60,7 @@ const LoginPage = () => {
               </label>
               <Link
                 href="/forgot-password"
-                className="text-sm font-medium text-blue-600 hover:text-blue-500 transition"
+                className="text-sm font-medium text-red-600 hover:text-red-500 transition"
               >
                 Forgot password?
               </Link>
@@ -92,7 +75,7 @@ const LoginPage = () => {
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 placeholder="••••••••"
-                className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                 required
               />
               <button
@@ -116,7 +99,7 @@ const LoginPage = () => {
               id="remember-me"
               name="remember-me"
               type="checkbox"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
             />
             <label
               htmlFor="remember-me"
@@ -131,7 +114,7 @@ const LoginPage = () => {
             type="submit"
             disabled={isLoading}
             onClick={handleLogin}
-            className={`w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition ${
+            className={`w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition ${
               isLoading ? "opacity-75 cursor-not-allowed" : ""
             }`}
           >
@@ -143,7 +126,7 @@ const LoginPage = () => {
           <span className="text-gray-500">Don't have an account? </span>
           <Link
             href="/auth/signup"
-            className="font-medium text-blue-600 hover:text-blue-500 transition"
+            className="font-medium text-red-600 hover:text-red-500 transition"
           >
             Sign up
           </Link>
@@ -165,7 +148,7 @@ const LoginPage = () => {
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
-            className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+            className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -179,7 +162,7 @@ const LoginPage = () => {
           </button>
           <button
             type="button"
-            className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
+            className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
           >
             <Github className="w-5 h-5 mr-2" />
             GitHub

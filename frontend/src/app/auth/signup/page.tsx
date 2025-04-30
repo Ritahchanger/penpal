@@ -16,13 +16,15 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8">
-      <div className="bg-white rounded-md shadow-sm border border-gray-200 p-8 w-full max-w-4xl">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4 py-8">
+      <div className="bg-white rounded-md shadow-lg border border-gray-200 p-8 w-full max-w-4xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-semibold text-red-600 mb-2">
             Create Your Account
           </h1>
-        
+          <p className="text-gray-500">
+            Join us today to access all the features
+          </p>
         </div>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
@@ -44,7 +46,7 @@ const SignupPage = () => {
                   name="firstName"
                   type="text"
                   placeholder="John"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   required
                 />
               </div>
@@ -67,7 +69,7 @@ const SignupPage = () => {
                   name="lastName"
                   type="text"
                   placeholder="Doe"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   required
                 />
               </div>
@@ -91,7 +93,7 @@ const SignupPage = () => {
                   type="email"
                   autoComplete="email"
                   placeholder="your@email.com"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   required
                 />
               </div>
@@ -114,7 +116,7 @@ const SignupPage = () => {
                   name="phone"
                   type="tel"
                   placeholder="+1234567890"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   required
                 />
               </div>
@@ -137,7 +139,7 @@ const SignupPage = () => {
                   name="nationalId"
                   type="text"
                   placeholder="ID Number"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   required
                 />
               </div>
@@ -163,7 +165,7 @@ const SignupPage = () => {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   required
                 />
                 <button
@@ -198,7 +200,7 @@ const SignupPage = () => {
                   name="confirmPassword"
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   required
                 />
                 <button
@@ -226,14 +228,14 @@ const SignupPage = () => {
                 id="terms"
                 name="terms"
                 type="checkbox"
-                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                className="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded"
                 required
               />
             </div>
             <div className="ml-3 text-sm">
               <label htmlFor="terms" className="font-medium text-gray-700">
                 I agree to the{" "}
-                <a href="#" className="text-blue-600 hover:text-blue-500">
+                <a href="#" className="text-red-600 hover:text-red-500">
                   Terms and Conditions
                 </a>
               </label>
@@ -244,7 +246,7 @@ const SignupPage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition ${
+            className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition ${
               isLoading ? "opacity-75 cursor-not-allowed" : ""
             }`}
           >
@@ -256,7 +258,7 @@ const SignupPage = () => {
             <span className="text-gray-600">Already have an account? </span>
             <Link
               href="/auth/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-red-600 hover:text-red-500"
             >
               Sign in
             </Link>
