@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-
 import {
   Eye,
   Download,
@@ -11,107 +10,97 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-
 import { useRouter } from "next/navigation";
-
 import { orders } from "@/components/userDashboard/SampleOrders";
 
 const Page = () => {
   const router = useRouter();
   return (
-    <div className="p-6 bg-white rounded-lg shadow-sm">
+    <div className="p-6 bg-white rounded-lg shadow shadow-red-100">
       <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">
-            ORDERS IN REVIEW
+          <h2 className="text-2xl font-bold text-[#e10000] uppercase">
+            Orders in Review
           </h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-600 mt-1">
             Review your successfully completed orders
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
+          <button className="flex items-center gap-2 px-4 py-2 bg-[#e10000] text-white rounded-md text-sm hover:bg-red-700 transition">
             <FileDown size={16} />
             Export
           </button>
-          <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors">
+          <button className="flex items-center gap-2 px-4 py-2 border border-[#e10000] text-[#e10000] rounded-md text-sm hover:bg-red-50 transition">
             <Filter size={16} />
             Filter
           </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto border border-gray-200 rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto border border-gray-200 rounded-md">
+        <table className="min-w-full divide-y divide-gray-100">
+          <thead className="bg-red-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Order ID
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Paper Details
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Details
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Timeline
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Rating
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              {[
+                "Order ID",
+                "Paper Details",
+                "Details",
+                "Timeline",
+                "Rating",
+                "Actions",
+              ].map((header) => (
+                <th
+                  key={header}
+                  className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  {header}
+                </th>
+              ))}
             </tr>
           </thead>
-
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-gray-100">
             {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-blue-600">
-                    {order.id}
-                  </div>
+              <tr key={order.id} className="hover:bg-red-50">
+                <td className="px-6 py-4 text-sm font-medium text-[#e10000]">
+                  {order.id}
                 </td>
                 <td className="px-6 py-4">
-                  <div className="text-sm font-medium text-gray-900">
+                  <div className="text-sm font-semibold text-gray-900">
                     {order.paperDetails}
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
                     {order.pages} pages • {order.words.toLocaleString()} words
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900 font-medium">
+                <td className="px-6 py-4">
+                  <div className="text-sm font-medium text-gray-800">
                     {order.charges}
                   </div>
                   <div
                     className={`text-xs mt-1 px-2 py-1 inline-flex rounded-full ${
                       order.status === "Completed"
                         ? "bg-green-100 text-green-800"
-                        : ""
+                        : "bg-yellow-100 text-yellow-800"
                     }`}
                   >
                     {order.status}
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  <div className="text-sm text-gray-500">
-                    <div>Assigned: {order.timeAssigned}</div>
-                    <div>Completed: {order.timeCompleted}</div>
-                    <div
-                      className={
-                        new Date(order.deadline) < new Date(order.timeCompleted)
-                          ? "text-red-600"
-                          : "text-green-600"
-                      }
-                    >
-                      Deadline: {order.deadline}
-                    </div>
+                <td className="px-6 py-4 text-sm text-gray-600">
+                  <div>Assigned: {order.timeAssigned}</div>
+                  <div>Completed: {order.timeCompleted}</div>
+                  <div
+                    className={`font-medium ${
+                      new Date(order.deadline) < new Date(order.timeCompleted)
+                        ? "text-red-600"
+                        : "text-green-600"
+                    }`}
+                  >
+                    Deadline: {order.deadline}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4">
                   <div className="flex items-center">
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
@@ -134,25 +123,25 @@ const Page = () => {
                     </span>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() =>
                         router.push(`/user/dashboard/orders/${order.id}`)
                       }
-                      className="text-gray-600 hover:text-blue-600 transition-colors"
+                      className="text-gray-600 hover:text-[#e10000] transition"
                       title="View details"
                     >
                       <Eye size={18} />
                     </button>
                     <button
-                      className="text-gray-600 hover:text-green-600 transition-colors"
+                      className="text-gray-600 hover:text-green-600 transition"
                       title="Download files"
                     >
                       <Download size={18} />
                     </button>
                     <button
-                      className="text-gray-600 hover:text-purple-600 transition-colors"
+                      className="text-gray-600 hover:text-purple-600 transition"
                       title="Submit revision"
                     >
                       <Upload size={18} />
@@ -165,11 +154,12 @@ const Page = () => {
         </table>
       </div>
 
+      {/* Pagination */}
       <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-sm text-gray-500">
-          Showing <span className="font-medium">1</span> to{" "}
-          <span className="font-medium">{orders.length}</span> of{" "}
-          <span className="font-medium">{orders.length}</span> results
+        <div className="text-sm text-gray-600">
+          Showing <span className="font-semibold">1</span> to{" "}
+          <span className="font-semibold">{orders.length}</span> of{" "}
+          <span className="font-semibold">{orders.length}</span> results
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -179,10 +169,10 @@ const Page = () => {
             <ChevronLeft size={16} />
             Previous
           </button>
-          <button className="px-3 py-1 border border-neutral-300 rounded-md text-sm bg-blue-600 text-white">
+          <button className="px-3 py-1 border border-[#e10000] text-white bg-[#e10000] rounded-md text-sm font-semibold">
             1
           </button>
-          <button className="px-3 py-1 border border-neutral-300 rounded-md text-sm flex items-center gap-1 hover:bg-gray-50">
+          <button className="px-3 py-1 border border-gray-300 rounded-md text-sm flex items-center gap-1 hover:bg-gray-100">
             Next
             <ChevronRight size={16} />
           </button>

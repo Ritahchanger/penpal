@@ -19,10 +19,10 @@ import { orders } from "@/components/userDashboard/SampleOrders";
 const Page = () => {
   const router = useRouter();
   return (
-    <div className="p-6 bg-white rounded-lg shadow-sm">
+    <div className="p-6 bg-white rounded-lg shadow-md border border-red-100">
       <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">
+          <h2 className="text-xl font-semibold text-red-700">
             ORDERS IN REVISION
           </h2>
           <p className="text-sm text-gray-500 mt-1">
@@ -30,47 +30,44 @@ const Page = () => {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
+          <button className="flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition-colors">
             <FileDown size={16} />
             Export
           </button>
-          <button className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors">
+          <button className="flex items-center gap-2 px-3 py-2 border border-red-300 rounded-md text-sm hover:bg-red-50 transition-colors text-red-700">
             <Filter size={16} />
             Filter
           </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto border border-gray-200 rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto border border-red-200 rounded-lg">
+        <table className="min-w-full divide-y divide-red-100">
+          <thead className="bg-red-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Order ID
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Paper Details
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Details
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Timeline
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Rating
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              {[
+                "Order ID",
+                "Paper Details",
+                "Details",
+                "Timeline",
+                "Rating",
+                "Actions",
+              ].map((head) => (
+                <th
+                  key={head}
+                  className="px-6 py-3 text-left text-xs font-medium text-red-600 uppercase tracking-wider"
+                >
+                  {head}
+                </th>
+              ))}
             </tr>
           </thead>
 
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-red-100">
             {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-50">
+              <tr key={order.id} className="hover:bg-red-50 transition-all">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-blue-600">
+                  <div className="text-sm font-semibold text-red-600">
                     {order.id}
                   </div>
                 </td>
@@ -83,14 +80,14 @@ const Page = () => {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900 font-medium">
+                  <div className="text-sm font-semibold text-red-700">
                     {order.charges}
                   </div>
                   <div
                     className={`text-xs mt-1 px-2 py-1 inline-flex rounded-full ${
                       order.status === "Completed"
                         ? "bg-green-100 text-green-800"
-                        : ""
+                        : "bg-yellow-100 text-yellow-800"
                     }`}
                   >
                     {order.status}
@@ -101,11 +98,11 @@ const Page = () => {
                     <div>Assigned: {order.timeAssigned}</div>
                     <div>Completed: {order.timeCompleted}</div>
                     <div
-                      className={
+                      className={`font-medium ${
                         new Date(order.deadline) < new Date(order.timeCompleted)
                           ? "text-red-600"
                           : "text-green-600"
-                      }
+                      }`}
                     >
                       Deadline: {order.deadline}
                     </div>
@@ -140,7 +137,7 @@ const Page = () => {
                       onClick={() =>
                         router.push(`/user/dashboard/orders/${order.id}`)
                       }
-                      className="text-gray-600 hover:text-blue-600 transition-colors"
+                      className="text-gray-600 hover:text-red-600 transition-colors"
                       title="View details"
                     >
                       <Eye size={18} />
@@ -167,22 +164,22 @@ const Page = () => {
 
       <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-sm text-gray-500">
-          Showing <span className="font-medium">1</span> to{" "}
-          <span className="font-medium">{orders.length}</span> of{" "}
-          <span className="font-medium">{orders.length}</span> results
+          Showing <span className="font-semibold">1</span> to{" "}
+          <span className="font-semibold">{orders.length}</span> of{" "}
+          <span className="font-semibold">{orders.length}</span> results
         </div>
         <div className="flex items-center gap-2">
           <button
-            className="px-3 py-1 border rounded-md text-sm flex items-center gap-1 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1 border border-red-200 rounded-md text-sm flex items-center gap-1 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled
           >
             <ChevronLeft size={16} />
             Previous
           </button>
-          <button className="px-3 py-1 border border-neutral-300 rounded-md text-sm bg-blue-600 text-white">
+          <button className="px-3 py-1 border border-red-600 rounded-md text-sm bg-red-600 text-white">
             1
           </button>
-          <button className="px-3 py-1 border border-neutral-300 rounded-md text-sm flex items-center gap-1 hover:bg-gray-50">
+          <button className="px-3 py-1 border border-red-300 rounded-md text-sm flex items-center gap-1 hover:bg-red-50 text-red-700">
             Next
             <ChevronRight size={16} />
           </button>

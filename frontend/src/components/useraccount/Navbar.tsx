@@ -31,6 +31,9 @@ const Navbar = () => {
             >
               LOGO
             </Link>
+            <div>
+              <span className="font-semibold">USERID:0050</span>
+            </div>
           </div>
 
           {/* Right section - User info and dropdown */}
