@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Menu, User, ChevronDown, ChevronUp, X } from "lucide-react";
 import { useSidebar } from "@/app/Context/SidebarContext/SidebarContext";
 import Link from "next/link";
-
+import { Sun, Moon } from "lucide-react";
 const Navbar = () => {
   const { toggleSidebar, isOpen } = useSidebar();
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -35,10 +35,15 @@ const Navbar = () => {
 
           {/* Right section - User info and dropdown */}
           <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center bg-green-700 px-3 py-1 rounded-md">
-              <span className="text-sm font-medium">Balance: sh 45,000</span>
+            <div className="hidden md:flex items-center bg-green-700 px-3 py-1 rounded-md justify-between">
+              <span className="text-sm font-medium block">
+                Balance: sh 45,000
+              </span>
+              <div></div>
             </div>
-
+            <button className="bg-green-700 p-[0.5rem] rounded-sm">
+              <Moon />
+            </button>
             <div className="relative">
               <button
                 onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}

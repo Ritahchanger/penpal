@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import "./Navbar.css";
 
-import {Sun,Moon} from "lucide-react"
+
 
 const Navbar = () => {
   return (

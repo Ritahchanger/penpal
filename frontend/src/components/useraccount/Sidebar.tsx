@@ -1,20 +1,17 @@
 "use client";
 
 import React from "react";
-
 import Link from "next/link";
-
 import { menuItems } from "../userDashboard/MenuItems";
-
 import { useSidebar } from "@/app/Context/SidebarContext/SidebarContext";
 
 const Sidebar = () => {
-  const { isOpen } = useSidebar();
+  const { isOpen, closeSidebar } = useSidebar();
 
   return (
     <div
-      className={`fixed left-0 sidebar  h-full w-64 bg-(background:--red) text-white shadow-md ${
-        isOpen ? "block" : "hidden"
+      className={`fixed left-0 top-0 h-full sidebar w-64 bg-red-600 text-white shadow-md z-50 transform transition-transform duration-300 ease-in-out ${
+        isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
       }`}
     >
       <div className="p-4">
@@ -23,12 +20,13 @@ const Sidebar = () => {
             <li key={index}>
               <Link
                 href={item.href}
-                className="flex items-center p-3 rounded-sm hover:bg-gray-100 transition-colors text-white  text-sm hover:text-(color:--red)  "
+                onClick={() => {
+                  closeSidebar();
+                }}
+                className="flex items-center p-3 rounded-sm hover:bg-gray-100 transition-colors text-white text-sm hover:text-red-600"
               >
                 <span className="mr-3 text-sm font-semibold">{item.icon}</span>
-                <span className="font-medium  text-xs font-semibold">
-                  {item.label}
-                </span>
+                <span className="font-medium text-xs ">{item.label}</span>
               </Link>
             </li>
           ))}

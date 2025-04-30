@@ -33,7 +33,7 @@ const LoginPage = () => {
   };
 
   const handleLogin = () => {
-    router.push("/user/dashboard/orders/completed");
+    router.push("/user/dashboard/orders/getorders");
   };
 
   return (
