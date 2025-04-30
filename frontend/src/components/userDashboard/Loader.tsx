@@ -1,28 +1,22 @@
-// components/Loader.tsx
 "use client";
 
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import { PacmanLoader } from "react-spinners";
 
-export default function Loader() {
-  const [loading, setLoading] = useState(true);
+export default function Loader({ isLoading }: { isLoading: boolean }) {
+  const [isVisible, setIsVisible] = useState(true);
 
-  //   useEffect(() => {
-  //     const handleStart = () => setLoading(true);
-  //     const handleComplete = () => setLoading(false);
-  //     window.addEventListener("routeChangeStart", handleStart);
-  //     window.addEventListener("routeChangeComplete", handleComplete);
-  //     window.addEventListener("routeChangeError", handleComplete);
+  useEffect(() => {
+    if (!isLoading) {
+      
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      return () => clearTimeout(timer);
+    } else {
+      setIsVisible(true);
+    }
+  }, [isLoading]);
 
-  //     return () => {
-  //       window.removeEventListener("routeChangeStart", handleStart);
-  //       window.removeEventListener("routeChangeComplete", handleComplete);
-  //       window.removeEventListener("routeChangeError", handleComplete);
-  //     };
-  //   }, []);
-
-  //   if (!loading) return null;
+  if (!isVisible) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 bg-opacity-50 backdrop-blur-sm">

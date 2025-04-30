@@ -4,6 +4,8 @@ import "./fonts/index.css";
 
 import { SidebarProvider } from "./Context/SidebarContext/SidebarContext";
 
+import { PageLoadProvider } from "./Providers/PageLoadProvider";
+
 import { Outfit } from "next/font/google";
 
 const outfit = Outfit({
@@ -19,9 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SidebarProvider>
-        <body className={`${outfit.variable} antialiased`}>{children}</body>
-      </SidebarProvider>
+      <body className={`${outfit.variable} antialiased`}>
+        <PageLoadProvider>
+          <SidebarProvider>{children}</SidebarProvider>
+        </PageLoadProvider>
+      </body>
     </html>
   );
 }

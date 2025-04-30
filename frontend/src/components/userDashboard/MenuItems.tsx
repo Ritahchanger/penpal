@@ -14,7 +14,7 @@ const menuItems = [
     icon: <ShoppingBag className="w-5 h-5" />,
   },
   {
-    href: "/user/dashboard/orders/getorders",
+    href: "/user/dashboard/orders/mybids",
     label: "MY BIDS",
     icon: <ShoppingBag className="w-5 h-5" />,
   },
