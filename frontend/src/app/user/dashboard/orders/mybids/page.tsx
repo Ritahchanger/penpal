@@ -28,7 +28,7 @@ const Page = () => {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
+          <button className="global-btn">
             <FileDown size={16} />
             Export
           </button>

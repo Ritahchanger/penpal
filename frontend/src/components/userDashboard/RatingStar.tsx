@@ -1,11 +1,10 @@
 import React from "react";
 
-const RatingStar = ({ key, rating }: { key: any; rating: any }) => {
+const RatingStar = ({ index, rating }: { index: any; rating: any }) => {
   return (
     <svg
-      key={key}
       className={`w-4 h-4 ${
-        key < Math.floor(rating) ? "text-yellow-400" : "text-gray-300"
+        index < Math.floor(rating) ? "text-yellow-400" : "text-gray-300"
       }`}
       fill="currentColor"
       viewBox="0 0 20 20"

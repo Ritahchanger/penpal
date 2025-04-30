@@ -22,9 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} antialiased`}>
-        <PageLoadProvider>
-          <SidebarProvider>{children}</SidebarProvider>
-        </PageLoadProvider>
+        <SidebarProvider>{children}</SidebarProvider>
       </body>
     </html>
   );

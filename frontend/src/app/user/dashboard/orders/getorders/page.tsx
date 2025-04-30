@@ -30,7 +30,7 @@ const Page = () => {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
+          <button className="global-btn">
             <FileDown size={16} />
             Export
           </button>
@@ -118,7 +118,7 @@ const Page = () => {
                   <div className="flex items-center">
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
-                        <RatingStar key={i} rating={order.rating} />
+                        <RatingStar index={1} key={i} rating={order.rating} />
                       ))}
                     </div>
                     <span className="ml-1 text-xs text-gray-500">
