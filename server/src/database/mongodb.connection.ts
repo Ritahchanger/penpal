@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 
-
 import { DateGenerator } from "../utils/DateGenerator";
-
-
 
 const UserSchema = new mongoose.Schema<any>({
     firstName: {
@@ -80,8 +77,6 @@ const UserSchema = new mongoose.Schema<any>({
     },
   });
 
-
-  
   const User = mongoose.model<any>("User",UserSchema);
 
 
