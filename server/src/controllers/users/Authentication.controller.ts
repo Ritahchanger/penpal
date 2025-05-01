@@ -1,9 +1,7 @@
 import bcrypt from "bcryptjs";
 
+
 import jwt from "jsonwebtoken";
-
-
-
 
 
 class AuthenticationController{
@@ -28,6 +26,7 @@ class PasswordController{
 
 
     public authenticateUser = async () =>{
+        
     }
 
 
@@ -43,6 +42,7 @@ class SocialAuthentication {
 
 
     public googleAuthentication = () =>{
+
     }
 
 
