@@ -4,7 +4,7 @@ const OrderMoreDetails = () => {
       <div>
         <div>
           <div>
-            <p>{"ORDER 001"}</p>
+            {/* <p>{"ORDER 001"}</p> */}
             <div></div>
           </div>
         </div>

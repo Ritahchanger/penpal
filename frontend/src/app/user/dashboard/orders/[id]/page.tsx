@@ -1,9 +1,9 @@
 "use client";
+import "./index.css"
 import { useRouter } from "next/navigation";
 import { Eye, Download, Upload } from "lucide-react";
-
 import OrderMoreDetails from "@/components/OrderMoreDetails/page";
-
+import MobileAssignment from "./MobileAssignment";
 const page = () => {
   const router = useRouter();
 
@@ -20,11 +20,11 @@ const page = () => {
     rating: 4.5,
   };
   return (
-    <div className="p-6">
+    <div className="p-6 simple-order">
       <div>
         <div>
           <div>
-            <div className="overflow-x-auto border border-gray-200 rounded-lg">
+            <div className="overflow-x-auto border border-gray-200 rounded-lg table-wrapper">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead>
                   <tr className="font-semibold">
@@ -147,6 +147,9 @@ const page = () => {
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div className="mobile-assignment">
+              <MobileAssignment sampleJob={sampleJob}/>
             </div>
             <OrderMoreDetails />
           </div>

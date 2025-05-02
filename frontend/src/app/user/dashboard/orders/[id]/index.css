@@ -1,0 +1,11 @@
+.simple-order .mobile-assignment {
+  display: none;
+}
+@media (max-width: 700px) {
+  .simple-order .table-wrapper {
+    display: none;
+  }
+  .simple-order .mobile-assignment {
+    display: block;
+  }
+}

@@ -12,7 +12,7 @@ export default function Home() {
       <main className="container mx-auto px-6 py-12">
         {/* Hero Section */}
         <section className="text-center mb-16">
-          <h1 className="text-4xl font-semibold text-[#FF0000] mb-4">
+          <h1 className="text-4xl font-semibold mt-[5rem] text-[#FF0000] mb-4">
             Connect with Top Writers & Clients
           </h1>
           <p className="text-lg text-gray-700 mb-8">

@@ -1,17 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import { Menu, User, ChevronDown, ChevronUp, X } from "lucide-react";
+import { Menu, User, ChevronDown, ChevronUp, X, Moon } from "lucide-react";
 import { useSidebar } from "@/app/Context/SidebarContext/SidebarContext";
 import Link from "next/link";
-import { Sun, Moon } from "lucide-react";
+import Image from "next/image";
+
 const Navbar = () => {
   const { toggleSidebar, isOpen } = useSidebar();
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   return (
     <>
-      <header className="h-[46px] shadow-md fixed w-full top-0 bg-(background:--red) text-white z-50">
-        <div className="flex items-center justify-between h-full px-4 md:px-6  mx-auto">
+      <header className="h-[46px] shadow-md fixed w-full top-0 bg-red-600 text-white z-50">
+        <div className="flex items-center justify-between h-full px-4 md:px-6 mx-auto">
           {/* Left section - Logo and menu toggle */}
           <div className="flex items-center space-x-4">
             <button
@@ -26,27 +27,31 @@ const Navbar = () => {
               )}
             </button>
             <Link
-              href="#"
-              className="text-lg font-bold tracking-wider hover:opacity-80"
+              href="/"
+              className="text-lg font-bold tracking-wider hover:opacity-80 flex items-center space-x-2"
             >
-              LOGO
+              <Image
+                src="/icons/pen-tool.png"
+                alt="Logo"
+                width={24}
+                height={24}
+              />
+              <span className="hidden sm:inline">Bemi Editors</span>
             </Link>
             <div>
-              <span className="font-semibold">USERID:0050</span>
+              <span className="font-semibold text-sm">USERID:0050</span>
             </div>
           </div>
 
           {/* Right section - User info and dropdown */}
           <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center bg-green-700 px-3 py-1 rounded-md justify-between">
-              <span className="text-sm font-medium block">
-                Balance: sh 45,000
-              </span>
-              <div></div>
+            <div className="hidden md:flex items-center bg-green-700 px-3 py-1 rounded-md">
+              <span className="text-sm font-medium">Balance: sh 45,000</span>
             </div>
-            <button className="bg-green-700 p-[0.5rem] rounded-sm">
-              <Moon />
+            <button className="bg-green-700 p-2 rounded-md">
+              <Moon className="text-white w-4 h-4" />
             </button>
+
             <div className="relative">
               <button
                 onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
@@ -71,21 +76,21 @@ const Navbar = () => {
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                   <Link
                     href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors text-sm"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Home
                   </Link>
                   <Link
                     href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors text-sm"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Admin
                   </Link>
                   <Link
                     href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors text-sm border-t border-gray-200"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm border-t border-gray-200"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Logout
@@ -96,7 +101,8 @@ const Navbar = () => {
           </div>
         </div>
       </header>
-      <p className="mt-[46px]"></p>
+      {/* Push content down to account for fixed navbar */}
+      <div className="mt-[46px]" />
     </>
   );
 };
