@@ -75,21 +75,21 @@ const Navbar = () => {
               {isUserDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                   <Link
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Home
                   </Link>
                   <Link
-                    href="#"
+                    href="/admin/"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Admin
                   </Link>
                   <Link
-                    href="#"
+                    href="/auth/login"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm border-t border-gray-200"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
