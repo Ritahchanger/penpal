@@ -43,9 +43,9 @@ body {
   background: #555;
 }
 
-.hero-section{
+.hero-section {
   max-height: calc(100vh - 50px);
-  align-items:center;
+  align-items: center;
 }
 
 .container {
@@ -54,47 +54,48 @@ body {
   margin: 0 auto;
 }
 
-.global-btn{
+.global-btn {
   padding: 0.5rem 2.5rem;
-  background-color:var(--red); 
+  background-color: var(--red);
   color: #ffffff;
-  font-size: 0.7rem; 
+  font-size: 0.7rem;
   font-weight: 500;
   border: none;
   border-radius: 0.375rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
-  display:flex;
-  justify-content:space-between;
-  font-size:0.8rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
 }
-
 
 .bid-button {
   padding: 0.4rem 1rem;
-  background-color: #22c55e; 
+  background-color: #22c55e;
   color: #ffffff;
-  font-size: 0.7rem; 
+  font-size: 0.7rem;
   font-weight: 500;
   border: none;
   border-radius: 0.375rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
 }
 
 .bid-button:hover {
-  background-color: #16a34a; 
+  background-color: #16a34a;
   transform: translateY(-1px);
 }
 
+/* styles/markdown.css */
+
+/* Container styles */
 
 
-
-@media(max-width:700px){
-  .hero-section{
+@media (max-width: 700px) {
+  .hero-section {
     flex-direction: column;
-    max-height:fit-content;
+    max-height: fit-content;
   }
 }
