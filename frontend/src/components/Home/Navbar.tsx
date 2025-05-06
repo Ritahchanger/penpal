@@ -4,6 +4,7 @@ import { Sun, Moon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image"; // ✅ Fixed import
 import "./Navbar.css";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -18,22 +19,11 @@ const Navbar = () => {
       <nav className="container mx-auto flex items-center justify-between px-4 h-full">
         {/* Logo */}
         <div className="text-xl font-bold text-[#FF0000] dark:text-white tracking-wide">
-          <Link
-            href="/"
-            className="text-lg font-bold tracking-wider hover:opacity-80 flex items-center space-x-2"
-          >
-            <Image
-              src="/icons/pen-tool.png"
-              alt="Logo"
-              width={24}
-              height={24}
-            />
-            <span className="hidden sm:inline">Bemi Editors</span>
-          </Link>
+          <Logo/>
         </div>
 
         {/* Navigation Links */}
-        <ul className="flex gap-6  font-medium text-gray-800 dark:text-gray-100">
+        <ul className="flex gap-6  font-medium text-white">
           <li>
             <Link
               href="/"
