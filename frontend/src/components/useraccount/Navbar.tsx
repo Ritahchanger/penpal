@@ -47,7 +47,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center bg-green-700 px-3 py-1 rounded-md">
               <span className="text-sm font-medium">Balance: sh 45,000</span>
-          </div>
+            </div>
             <button className="bg-green-700 p-2 rounded-md">
               <Moon className="text-white w-4 h-4" />
             </button>
@@ -80,6 +80,13 @@ const Navbar = () => {
                     onClick={() => setIsUserDropdownOpen(false)}
                   >
                     Home
+                  </Link>
+                  <Link
+                    href="/"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm"
+                    onClick={() => setIsUserDropdownOpen(false)}
+                  >
+                    Profile
                   </Link>
                   <Link
                     href="/admin/"

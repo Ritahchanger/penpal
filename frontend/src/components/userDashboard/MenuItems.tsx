@@ -5,6 +5,7 @@ import {
   Edit,
   XCircle,
   Wallet,
+  UserCircle,
 } from "lucide-react";
 
 const menuItems = [
@@ -42,6 +43,11 @@ const menuItems = [
     href: "/user/dashboard/withdrawals",
     label: "WITHDRAWALS",
     icon: <Wallet className="w-5 h-5" />,
+  },
+  {
+    href: "/user/dashboard/profile",
+    label: "PROFILE",
+    icon: <UserCircle className="w-5 h-5" />,
   },
 ];
 
