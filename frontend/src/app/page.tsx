@@ -38,8 +38,8 @@ export default function Home() {
         </section>
 
         {/* How It Works Section */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="text-center">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-16">
+          <div className="text-center border border-neutral-100 p-4">
             <FileText className="mx-auto text-4xl text-[#FF0000]" />
             <h3 className="text-xl font-semibold text-gray-800 mt-4">
               Post a Project
@@ -49,7 +49,7 @@ export default function Home() {
               talent.
             </p>
           </div>
-          <div className="text-center">
+          <div className="text-center border border-neutral-100 p-4">
             <Users className="mx-auto text-4xl text-[#FF0000]" />
             <h3 className="text-xl font-semibold text-gray-800 mt-4">
               Browse Profiles
@@ -58,7 +58,7 @@ export default function Home() {
               Explore profiles of writers and clients to find the perfect match.
             </p>
           </div>
-          <div className="text-center">
+          <div className="text-center border border-neutral-100 p-4">
             <FileText className="mx-auto text-4xl text-[#FF0000]" />
             <h3 className="text-xl font-semibold text-gray-800 mt-4">
               Get Started
