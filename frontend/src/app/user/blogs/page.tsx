@@ -4,7 +4,7 @@ const BlogPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="py-16 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Main Blog Content */}
           <article className="lg:w-3/4 bg-white shadow-sm border border-gray-100 p-8 rounded-sm">

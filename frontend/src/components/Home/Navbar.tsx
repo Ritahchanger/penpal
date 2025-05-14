@@ -1,77 +1,90 @@
 "use client";
 import { useState } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image"; // ✅ Fixed import
-import "./Navbar.css";
 import Logo from "./Logo";
+import NavigationMobile from "./NavigationMobile";
+
+interface NavLink {
+  href: string;
+  label: string;
+}
 
 const Navbar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark", !isDarkMode);
+  const navLinks: NavLink[] = [
+    { href: "/", label: "Home" },
+    { href: "/user/blogs", label: "Blogs" },
+    { href: "/auth/login", label: "Login" },
+    { href: "/auth/signup", label: "Sign Up" }
+  ];
+
+  const toggleTheme = (): void => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    document.documentElement.classList.toggle("dark", newMode);
+  };
+
+  const toggleMobileMenu = (): void => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-[46px] bg-red-600 shadow-md z-50">
+    <header className="fixed top-0 left-0 right-0 h-[46px] bg-red-600 shadow-md z-50 dark:bg-red-800">
       <nav className="container mx-auto flex items-center justify-between px-4 h-full">
         {/* Logo */}
-        <div className="text-xl font-bold text-[#FF0000] dark:text-white tracking-wide">
-          <Logo/>
-        </div>
+        <Link href="/" className="flex items-center" aria-label="Home">
+          <Logo />
+        </Link>
 
-        {/* Navigation Links */}
-        <ul className="flex gap-6  font-medium text-white">
-          <li>
-            <Link
-              href="/"
-              className="hover:text-[#FF0000] dark:hover:text-[#FF0000] transition"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/user/blogs"
-              className="hover:text-[#FF0000] dark:hover:text-[#FF0000] transition"
-            >
-              Blogs
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/auth/login"
-              className="hover:text-[#FF0000] dark:hover:text-[#FF0000] transition"
-            >
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/auth/signup"
-              className="hover:text-[#FF0000] dark:hover:text-[#FF0000] transition"
-            >
-              Sign Up
-            </Link>
-          </li>
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex items-center gap-8 font-medium text-white">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="hover:text-red-200 dark:hover:text-red-300 transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="text-gray-800 dark:text-gray-100"
-          aria-label={
-            isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
-          }
-        >
-          {isDarkMode ? (
-            <Sun className="h-5 w-5" />
-          ) : (
-            <Moon className="h-5 w-5" />
-          )}
-        </button>
+        {/* Right Side Controls */}
+        <div className="flex items-center gap-4">
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="text-white hover:text-red-200 transition-colors duration-200"
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDarkMode ? (
+              <Sun className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Moon className="h-5 w-5" aria-hidden="true" />
+            )}
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden text-white hover:text-red-200 transition-colors duration-200"
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <Menu className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        <NavigationMobile 
+          isOpen={isMobileMenuOpen} 
+          onClose={() => setIsMobileMenuOpen(false)}
+          links={navLinks}
+        />
       </nav>
     </header>
   );
