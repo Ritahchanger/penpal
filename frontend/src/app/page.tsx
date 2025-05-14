@@ -78,7 +78,39 @@ export default function Home() {
             {/* Example Writer Card */}
             <div className="bg-white p-6 rounded-lg border border-red-300">
               <img
-                src="https://via.placeholder.com/150"
+                src="https://images.pexels.com/photos/32037492/pexels-photo-32037492/free-photo-of-cultural-parade-with-traditional-attire-and-horses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="Writer"
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+              <h3 className="text-xl font-semibold text-gray-800 mt-4">
+                Dennis Peter Munyao
+              </h3>
+              <p className="text-gray-600 mt-2">
+                Expert in SEO and Content Writing
+              </p>
+              <button className="mt-4 w-full py-2 bg-[#FF0000] text-white rounded-lg">
+                View Profile
+              </button>
+            </div>
+            <div className="bg-white p-6 rounded-lg border border-red-300">
+              <img
+                src="https://images.pexels.com/photos/32037492/pexels-photo-32037492/free-photo-of-cultural-parade-with-traditional-attire-and-horses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="Writer"
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+              <h3 className="text-xl font-semibold text-gray-800 mt-4">
+                Dennis Peter Munyao
+              </h3>
+              <p className="text-gray-600 mt-2">
+                Expert in SEO and Content Writing
+              </p>
+              <button className="mt-4 w-full py-2 bg-[#FF0000] text-white rounded-lg">
+                View Profile
+              </button>
+            </div>
+            <div className="bg-white p-6 rounded-lg border border-red-300">
+              <img
+                src="https://images.pexels.com/photos/32037492/pexels-photo-32037492/free-photo-of-cultural-parade-with-traditional-attire-and-horses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Writer"
                 className="w-full h-48 object-cover rounded-t-lg"
               />

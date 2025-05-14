@@ -24,6 +24,42 @@ const WithdrawalPage = () => {
       amountPaid: 0,
       balance: 2500,
     },
+    {
+      id: 3,
+      requestedAmount: 1500,
+      date: "2023-05-15",
+      phoneNumber: "0723123456",
+      paidOn: "2023-05-16",
+      amountPaid: 1500,
+      balance: 0,
+    },
+    {
+      id: 4,
+      requestedAmount: 2500,
+      date: "2023-05-18",
+      phoneNumber: "0723765432",
+      paidOn: "Pending",
+      amountPaid: 0,
+      balance: 2500,
+    },
+    {
+      id: 5,
+      requestedAmount: 1500,
+      date: "2023-05-15",
+      phoneNumber: "0723123456",
+      paidOn: "2023-05-16",
+      amountPaid: 1500,
+      balance: 0,
+    },
+    {
+      id: 6,
+      requestedAmount: 2500,
+      date: "2023-05-18",
+      phoneNumber: "0723765432",
+      paidOn: "Pending",
+      amountPaid: 0,
+      balance: 2500,
+    },
   ];
 
   // Dummy data for cleared transactions
