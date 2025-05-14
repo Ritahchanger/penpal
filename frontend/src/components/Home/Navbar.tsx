@@ -34,7 +34,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/blogs"
+              href="/user/blogs"
               className="hover:text-[#FF0000] dark:hover:text-[#FF0000] transition"
             >
               Blogs
