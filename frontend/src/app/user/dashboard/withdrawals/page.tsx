@@ -97,7 +97,7 @@ const WithdrawalPage = () => {
     <div className="min-h-screen bg-gray-100 p-4 md:p-8">
       <div className="max-w-8xl mx-auto">
         {/* Header */}
-        <div className="bg-red-600 text-white p-4 rounded-t-sm shadow-md">
+        <div className="bg-gradient-to-r from-red-600 to-red-700   rounded-lg  text-white p-4 rounded-t-sm shadow-md">
           <h2 className="text-xl md:text-2xl font-bold text-center">
             WITHDRAWAL MONEY
           </h2>
@@ -108,9 +108,13 @@ const WithdrawalPage = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
           <div className="bg-white p-4 rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold text-red-600 mb-4 border-b pb-2">
-              YOUR PENDING WITHDRAWALS
-            </h4>
+            <h2 className="text-lg font-semibold text-gray-900 flex items-center">
+              <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+              Pending Withdrawals
+              <span className="ml-auto bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                {pendingWithdrawals.length}
+              </span>
+            </h2>
             <div className="overflow-x-auto">
               <PendingWithdrawals pendingWithdrawals={pendingWithdrawals} />
             </div>

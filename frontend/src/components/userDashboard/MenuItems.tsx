@@ -6,6 +6,7 @@ import {
   XCircle,
   Wallet,
   UserCircle,
+  TrendingUp,
 } from "lucide-react";
 
 const menuItems = [
@@ -48,6 +49,11 @@ const menuItems = [
     href: "/user/dashboard/profile",
     label: "PROFILE",
     icon: <UserCircle className="w-5 h-5" />,
+  },
+  {
+    href: "/user/dashboard/profile",
+    label: "WORK PROGRESS",
+    icon: <TrendingUp className="w-5 h-5" />,
   },
 ];
 
