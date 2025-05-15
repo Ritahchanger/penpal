@@ -13,7 +13,6 @@ const Navbar = () => {
     <>
       <header className="h-[46px] shadow-md fixed w-full top-0 bg-red-600 text-white z-50">
         <div className="flex items-center justify-between h-full px-4 md:px-6 mx-auto">
-          {/* Left section - Logo and menu toggle */}
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleSidebar}
@@ -21,9 +20,9 @@ const Navbar = () => {
               aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
             >
               {isOpen ? (
-                <X className="w-5 h-5" />
+                <X className="w-7 h-7" />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className="w-9 h-9" />
               )}
             </button>
             <Link
@@ -42,8 +41,6 @@ const Navbar = () => {
               <span className="font-semibold text-sm">USERID:0050</span>
             </div>
           </div>
-
-          {/* Right section - User info and dropdown */}
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center bg-green-700 px-3 py-1 rounded-md">
               <span className="text-sm font-medium">Balance: sh 45,000</span>
@@ -108,7 +105,6 @@ const Navbar = () => {
           </div>
         </div>
       </header>
-      {/* Push content down to account for fixed navbar */}
       <div className="mt-[46px]" />
     </>
   );
