@@ -51,7 +51,7 @@ const menuItems = [
     icon: <UserCircle className="w-5 h-5" />,
   },
   {
-    href: "/user/dashboard/profile",
+    href: "/user/dashboard/profile_progress",
     label: "WORK PROGRESS",
     icon: <TrendingUp className="w-5 h-5" />,
   },
