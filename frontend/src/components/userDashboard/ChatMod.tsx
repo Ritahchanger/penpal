@@ -1,10 +1,20 @@
-'use client';
+"use client";
 
-import { User } from "lucide-react";
+import { User, X } from "lucide-react";
 
-const ChatMod = () => {
+type ChatModProps = {
+  onClose: () => void;
+};
+
+const ChatMod = ({ onClose }: ChatModProps) => {
   return (
-    <div className="max-w-sm rounded-lg shadow-md overflow-hidden bg-green-600 mb-4">
+    <div className="max-w-sm rounded-lg shadow-md overflow-hidden bg-green-800 mb-4 relative w-full">
+      <button
+        onClick={onClose}
+        className="absolute top-2 right-2 bg-green-600 hover:bg-red-500 rounded-full w-[26px] h-[26px] flex items-center justify-center"
+      >
+        <X size={18} color="#fff" />
+      </button>
       <div className="flex items-center p-4 space-x-3">
         <div className="flex-shrink-0">
           <User color="white" size={32} />
