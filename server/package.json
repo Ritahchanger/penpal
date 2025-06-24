@@ -1,46 +1,19 @@
 {
-  "name": "backend",
+  "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "./src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./dist/server.js",
-    "dev": "nodemon ./src/server/server.ts",
-    "build": "tsc",
-    "watch": "tsc --watch"
+    "dev":"nodemon ./src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/cookie-parser": "^1.4.8",
-    "@types/cors": "^2.8.17",
-    "@types/dotenv": "^6.1.1",
-    "@types/moment": "^2.11.29",
-    "@types/moment-timezone": "^0.5.13",
-    "@types/mongoose": "^5.11.96",
-    "@types/morgan": "^1.9.9",
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^3.0.2",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "bcrypt": "^6.0.0",
     "jsonwebtoken": "^9.0.2",
-    "moment": "^2.30.1",
-    "moment-timezone": "^0.5.48",
-    "mongoose": "^8.14.1",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.1",
-    "@types/node": "^22.15.3",
-    "@types/nodemon": "^1.19.6",
-    "nodemon": "^3.1.10",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3"
+    "mongoose": "^8.16.0",
+    "nodemon": "^3.1.10"
   }
 }

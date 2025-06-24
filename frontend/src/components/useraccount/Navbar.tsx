@@ -98,7 +98,7 @@ const Navbar = () => {
                     Profile
                   </Link>
                   <Link
-                    href="/admin/"
+                    href="/admin/dashboard/add-work"
                     className="block px-4 py-2 text-gray-800 hover:bg-red-300 text-sm"
                     onClick={() => setIsUserDropdownOpen(false)}
                   >

@@ -1,12 +1,17 @@
 import {
+ 
+  TrendingUp,
   ShoppingBag,
   Clock,
   FileSearch,
   Edit,
-  XCircle,
+  Eye,
   Wallet,
   UserCircle,
-  TrendingUp,
+  Banknote,
+  XCircle,
+  FilePlus,
+  Users,
 } from "lucide-react";
 
 const menuItems = [
@@ -57,4 +62,72 @@ const menuItems = [
   },
 ];
 
-export { menuItems };
+
+const adminMenuItems = [
+  {
+    href: "/admin/dashboard/add-work",
+    label: "Add Work",
+    icon: <FilePlus className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/writers",
+    label: "Writers",
+    icon: <Users className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/unassigned",
+    label: "Unassigned",
+    icon: <Users className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/in-progress",
+    label: "In Progress",
+    icon: <Clock className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/orders-adjustment",
+    label: "Orders Adjustment",
+    icon: <FileSearch className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/drafts",
+    label: "Drafts",
+    icon: <Edit className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/in-review",
+    label: "In Review",
+    icon: <Eye className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/completed",
+    label: "Completed",
+    icon: <Wallet className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/in-revision",
+    label: "In Revision",
+    icon: <UserCircle className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/withdrawals",
+    label: "Withdrawals",
+    icon: <Banknote className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/cancelled",
+    label: "Cancelled",
+    icon: <XCircle className="w-5 h-5" />,
+  },
+  {
+    href: "/admin/dashboard/application",
+    label: "Applications",
+    icon: <FileSearch className="w-5 h-5" />,
+  },
+];
+
+
+
+
+
+export { menuItems,adminMenuItems };

@@ -10,23 +10,22 @@ import ChatModal from "@/components/userDashboard/ChatModal";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [smallChatModal, setSmallChatModal] = useState(false);
   const [bigChatModal, setBigChatModal] = useState(false);
 
-  // Open small chat modal
   const handleChatModal = () => setSmallChatModal(true);
 
-  // Open big chat modal and close small chat modal
+
   const handleBigChatModal = () => {
     setBigChatModal(true);
     setSmallChatModal(false);
   };
 
-  // Close big chat modal
+
   const hideBigChatModal = () => setBigChatModal(false);
 
-  // Close small chat modal
   const hideChatModal = () => setSmallChatModal(false);
 
   return (
