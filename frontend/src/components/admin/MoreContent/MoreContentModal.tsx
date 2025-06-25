@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github.css"; // or any other theme like 'monokai', 'atom-one-dark'
+import "highlight.js/styles/github.css"; // Optional: change to another theme
 
 const MoreContentModal = () => {
   const dispatch = useDispatch();
@@ -99,18 +99,66 @@ const MoreContentModal = () => {
               <div>
                 <h3 className="font-semibold text-gray-700 mb-1">Files:</h3>
                 {job?.files && job.files.length > 0 ? (
-                  <ul className="list-disc list-inside space-y-1">
-                    {job.files.map((file: string, index: number) => (
-                      <li
-                        key={index}
-                        className="text-sm text-blue-600 hover:underline cursor-pointer"
-                      >
-                        <a href={file} target="_blank" rel="noopener noreferrer">
-                          {file}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {job.files.map((file: string, index: number) => {
+                      const fileExt = file.split('.').pop()?.toLowerCase();
+
+                      if (
+                        ["jpg", "jpeg", "png", "gif", "webp"].includes(
+                          fileExt || ""
+                        )
+                      ) {
+                        // Image preview
+                        return (
+                          <div
+                            key={index}
+                            className="border rounded-md overflow-hidden shadow-sm"
+                          >
+                            <img
+                              src={file}
+                              alt={`Uploaded File ${index + 1}`}
+                              className="w-full h-auto object-contain"
+                            />
+                          </div>
+                        );
+                      } else if (fileExt === "pdf") {
+                        // PDF preview
+                        return (
+                          <div
+                            key={index}
+                            className="border border-neutral-300 rounded-md overflow-hidden shadow-sm"
+                          >
+                            <iframe
+                              src={file}
+                              className="w-full h-64"
+                              title={`PDF File ${index + 1}`}
+                            ></iframe>
+                          </div>
+                        );
+                      } else {
+                        // Other file types
+                        return (
+                          <div
+                            key={index}
+                            className="p-3 bg-gray-100 rounded shadow-sm flex items-center justify-between"
+                          >
+                            <span className="text-sm truncate w-4/5">
+                              {file.split("/").pop()}
+                            </span>
+                            <a
+                              href={file}
+                              download
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 text-sm underline"
+                            >
+                              Download
+                            </a>
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
                 ) : (
                   <p className="text-sm text-gray-600">No files uploaded.</p>
                 )}
