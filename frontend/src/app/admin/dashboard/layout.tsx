@@ -4,10 +4,6 @@ import Sidebar from "@/components/admin/sidebar/Sidebar";
 
 import Navbar from "@/components/admin/navbar/Navbar";
 
-import AdminSidebarProvider from "@/Providers/AdminSidebarProvider";
-
-import MoreContentModal from "@/components/admin/MoreContent/MoreContentModal";
-
 interface Props {
   children: React.ReactNode;
 }
@@ -15,12 +11,9 @@ interface Props {
 const layout = ({ children }: Props) => {
   return (
     <div>
-      <AdminSidebarProvider>
-        <Navbar />
-        {children}
-        <Sidebar />
-        <MoreContentModal/>
-      </AdminSidebarProvider>
+      <Navbar />
+      {children}
+      <Sidebar />
     </div>
   );
 };

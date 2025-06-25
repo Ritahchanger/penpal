@@ -44,16 +44,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="relative max-w-md mx-auto mr-[1rem]">
-              <input
-                type="text"
-                placeholder="Search order by ID"
-                className="w-full pl-10 pr-4 py-2 bg-red-700 rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Search color="white"/>
-              </div>
-            </div>
+           
             <div className="hidden md:flex items-center bg-green-700 px-3 py-1 rounded-md">
               <span className="text-sm font-medium">Balance: sh 45,000</span>
             </div>

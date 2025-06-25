@@ -7,6 +7,7 @@ interface Job {
   deadline?: string;
   charges?: number;
   files?: string[];
+  description?:string
 }
 
 interface ModalState {

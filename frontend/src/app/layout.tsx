@@ -8,6 +8,10 @@ import { PageLoadProvider } from "./Providers/PageLoadProvider";
 
 import { Outfit } from "next/font/google";
 
+import MoreContentModal from "@/components/admin/MoreContent/MoreContentModal";
+
+import AdminSidebarProvider from "@/Providers/AdminSidebarProvider";
+
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -22,7 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} antialiased`}>
-        <SidebarProvider>{children}</SidebarProvider>
+        <AdminSidebarProvider>
+          <SidebarProvider>
+            {children}
+            <MoreContentModal />
+          </SidebarProvider>
+        </AdminSidebarProvider>
       </body>
     </html>
   );

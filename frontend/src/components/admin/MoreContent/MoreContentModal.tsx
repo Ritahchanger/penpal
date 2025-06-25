@@ -6,6 +6,10 @@ import { RootState } from "@/store/store/store";
 import { closeModal } from "@/store/features/ModalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github.css"; // or any other theme like 'monokai', 'atom-one-dark'
 
 const MoreContentModal = () => {
   const dispatch = useDispatch();
@@ -47,38 +51,40 @@ const MoreContentModal = () => {
             </div>
 
             {/* Job Details */}
-            <div className="space-y-4">
+            <div className="space-y-6">
+              {/* Markdown Description */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-1">
-                  Description:
+                  Description (Markdown Supported):
                 </h3>
-                <p className="text-sm text-gray-600">
-                  {job?.paperDetails || "No details provided."}
-                </p>
+                <div className="prose max-w-none prose-sm sm:prose">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeHighlight]}
+                  >
+                    {job?.description || "*No description provided.*"}
+                  </ReactMarkdown>
+                </div>
               </div>
 
+              {/* Client */}
               <div>
-                <h3 className="font-semibold text-gray-700 mb-1">
-                  Client:
-                </h3>
                 <p className="text-sm text-gray-600">
                   {job?.client || "Unknown"}
                 </p>
               </div>
 
+              {/* Deadline */}
               <div>
-                <h3 className="font-semibold text-gray-700 mb-1">
-                  Deadline:
-                </h3>
+                <h3 className="font-semibold text-gray-700 mb-1">Deadline:</h3>
                 <p className="text-sm text-gray-600">
                   {job?.deadline || "Not specified"}
                 </p>
               </div>
 
+              {/* Charges */}
               <div>
-                <h3 className="font-semibold text-gray-700 mb-1">
-                  Charges:
-                </h3>
+                <h3 className="font-semibold text-gray-700 mb-1">Charges:</h3>
                 <p className="text-sm text-gray-600">
                   {job?.charges
                     ? new Intl.NumberFormat("en-KE", {
@@ -89,6 +95,7 @@ const MoreContentModal = () => {
                 </p>
               </div>
 
+              {/* Files */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-1">Files:</h3>
                 {job?.files && job.files.length > 0 ? (
@@ -98,7 +105,9 @@ const MoreContentModal = () => {
                         key={index}
                         className="text-sm text-blue-600 hover:underline cursor-pointer"
                       >
-                        {file}
+                        <a href={file} target="_blank" rel="noopener noreferrer">
+                          {file}
+                        </a>
                       </li>
                     ))}
                   </ul>
