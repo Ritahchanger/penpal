@@ -18,12 +18,48 @@ const addOrderController = async (req, res) => {
 };
 
 
-const getPendingOrdersController = async (req, res) => {
-      const orders = await OrdersService.getPendingOrdersService();
+const getPendingUnbidOrdersController = async (req, res) => {
+      const orders = await OrdersService.getUnbidOrdersService();
       res.status(200).json({ success: true, data: orders });
-  };
+};
+
+
+
+const addBidderController = async (req, res) => {
+
+  const { orderId } = req.params;
+
+  const userId = req.user._id; 
+
+  const result = await OrdersService.addBidderToOrder(orderId, userId);
+
+  if (result.success) {
+
+    res.status(200).json(result);
+
+  } else {
+
+    res.status(400).json(result);
+
+  }
+};
+
+
+const cancelBidController = async (req, res) => {
+  const { orderId } = req.params;
+  const userId = req.user._id;
+
+  const result = await OrdersService.cancelBidOnOrder(orderId, userId);
+
+  if (result.success) {
+    res.status(200).json(result);
+  } else {
+    res.status(400).json(result);
+  }
+};
 
 
 
 
-  module.exports = { addOrderController,getPendingOrdersController}
+
+  module.exports = { addOrderController,getPendingUnbidOrdersController,addBidderController,addBidderController,cancelBidController}

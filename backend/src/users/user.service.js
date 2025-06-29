@@ -2,7 +2,11 @@ const User = require("./user.model");
 
 const bcrypt = require("bcrypt");
 
+const jwt =  require("jsonwebtoken");
+
 const CustomError = require("../utils/CustomError");
+
+require("dotenv").config()
 
 const registerUser = async (userData) => {
   const {

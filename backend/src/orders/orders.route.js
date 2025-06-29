@@ -1,7 +1,7 @@
 const express = require("express");
 
 
-const Route = express.Router();
+const Router = express.Router();
 
 
 
@@ -17,14 +17,21 @@ const OrderController = require("./orders.controller");
 
 
 
-Route.post(
+Router.post(
   '/',
   upload.array('files', 10), 
   asyncMiddleware(OrderController.addOrderController)
 );
 
 
-Route.get('/pending',asyncMiddleware(OrderController.getPendingOrdersController))
+Router.get('/unbid',asyncMiddleware(OrderController.getPendingUnbidOrdersController))
 
 
-module.exports = Route;
+Router.get("/orders/:orderId/bid",asyncMiddleware(OrderController.addBidderController))
+
+
+Router.put("/orders/:orderId/cancel-bid", asyncMiddleware(OrderController.cancelBidController));
+
+
+
+module.exports = Router;
