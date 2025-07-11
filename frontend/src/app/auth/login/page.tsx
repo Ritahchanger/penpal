@@ -1,28 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { Eye, EyeOff, Github, Mail, Lock } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { baseUrl } from "@/config/baseUrl";
+import axios from "axios";
+
+import { useAuth } from "@/context/Authentication/AuthenticationContext";
+
 
 const LoginPage = () => {
+
+  const { login } = useAuth();
+
   const [showPassword, setShowPassword] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
-  const handleLogin = () => {
-    router.push("/user/dashboard/orders/getorders");
+    e.preventDefault();
+
+    
+    setIsLoading(true);
+
+    
+    const form = e.currentTarget;
+
+    
+    const email = (form.email as HTMLInputElement).value;
+
+
+    const password = (form.password as HTMLInputElement).value;
+
+    try {
+
+      const response = await axios.post(`${baseUrl.url}/v1/user/login`, {
+
+        email,
+
+        password,
+
+      });
+
+      if (!response.data.success) {
+
+        alert("Login failed: Invalid credentials");
+
+        return;
+      }
+
+      login(response.data.token, response.data.user);
+
+      router.push("/user/dashboard/orders/getorders");
+
+    } catch (error: any) {
+
+      console.error(
+
+        "Login error:",
+
+        error?.response?.data?.message || error.message
+
+      );
+      alert(
+        "Login failed: " + (error?.response?.data?.message || error.message)
+      );
+      
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-red-50 px-4">
       <div className="bg-white rounded-sm shadow-sm border border-gray-200 p-8 w-full max-w-md">
-        <div className="text-center mb-8"></div>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-800">Sign in</h2>
+        </div>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Email Field */}
@@ -113,7 +171,6 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            onClick={handleLogin}
             className={`w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition ${
               isLoading ? "opacity-75 cursor-not-allowed" : ""
             }`}
@@ -122,6 +179,7 @@ const LoginPage = () => {
           </button>
         </form>
 
+        {/* Sign Up Link */}
         <div className="mt-6 text-center text-sm">
           <span className="text-gray-500">Don't have an account? </span>
           <Link

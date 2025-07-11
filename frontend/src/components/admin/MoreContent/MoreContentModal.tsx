@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X } from "lucide-react";
+import { X, Download } from "lucide-react";
 import { RootState } from "@/store/store/store";
 import { closeModal } from "@/store/features/ModalSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github.css"; // Optional: change to another theme
+import "highlight.js/styles/github.css";
 
 const MoreContentModal = () => {
   const dispatch = useDispatch();
@@ -17,11 +17,29 @@ const MoreContentModal = () => {
     (state: RootState) => state.moreDescription
   );
 
+  const handleDownload = async (url: string, fileName: string) => {
+    try {
+      const response = await fetch(url, { mode: "cors" });
+      const blob = await response.blob();
+
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex">
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -30,7 +48,6 @@ const MoreContentModal = () => {
             onClick={() => dispatch(closeModal())}
           ></motion.div>
 
-          {/* Sidebar */}
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -50,9 +67,7 @@ const MoreContentModal = () => {
               </button>
             </div>
 
-            {/* Job Details */}
             <div className="space-y-6">
-              {/* Markdown Description */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-1">
                   Description (Markdown Supported):
@@ -67,14 +82,12 @@ const MoreContentModal = () => {
                 </div>
               </div>
 
-              {/* Client */}
               <div>
                 <p className="text-sm text-gray-600">
-                  {job?.client || "Unknown"}
+                  {job?.clientName || "Unknown"}
                 </p>
               </div>
 
-              {/* Deadline */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-1">Deadline:</h3>
                 <p className="text-sm text-gray-600">
@@ -82,7 +95,6 @@ const MoreContentModal = () => {
                 </p>
               </div>
 
-              {/* Charges */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-1">Charges:</h3>
                 <p className="text-sm text-gray-600">
@@ -95,65 +107,73 @@ const MoreContentModal = () => {
                 </p>
               </div>
 
-              {/* Files */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-1">Files:</h3>
-                {job?.files && job.files.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {job.files.map((file: string, index: number) => {
-                      const fileExt = file.split('.').pop()?.toLowerCase();
+                {Array.isArray(job?.files) && job.files.length > 0 ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {job.files.map((file, index) => {
+                      const fileExt = file.fileName
+                        .split(".")
+                        .pop()
+                        ?.toLowerCase();
 
-                      if (
-                        ["jpg", "jpeg", "png", "gif", "webp"].includes(
-                          fileExt || ""
-                        )
-                      ) {
-                        // Image preview
+                      const isImage = [
+                        "jpg",
+                        "jpeg",
+                        "png",
+                        "gif",
+                        "webp",
+                      ].includes(fileExt || "");
+
+                      const commonWrapperClasses =
+                        "relative border border-neutral-300 rounded-md overflow-hidden shadow-sm group";
+
+                      const iconOverlay = (
+                        <div
+                          className="absolute top-2 right-2 bg-black/60 rounded-full p-1 text-white cursor-pointer hover:bg-black"
+                          onClick={() =>
+                            handleDownload(file.downloadURL, file.fileName)
+                          }
+                        >
+                          <Download size={16} />
+                        </div>
+                      );
+
+                      if (isImage) {
                         return (
-                          <div
-                            key={index}
-                            className="border rounded-md overflow-hidden shadow-sm"
-                          >
+                          <div key={index} className={commonWrapperClasses}>
                             <img
-                              src={file}
-                              alt={`Uploaded File ${index + 1}`}
+                              src={file.downloadURL}
+                              alt={file.fileName}
                               className="w-full h-auto object-contain"
                             />
+                            {iconOverlay}
                           </div>
                         );
                       } else if (fileExt === "pdf") {
-                        // PDF preview
                         return (
-                          <div
-                            key={index}
-                            className="border border-neutral-300 rounded-md overflow-hidden shadow-sm"
-                          >
+                          <div key={index} className={commonWrapperClasses}>
                             <iframe
-                              src={file}
+                              src={file.downloadURL}
                               className="w-full h-64"
                               title={`PDF File ${index + 1}`}
                             ></iframe>
+                            {iconOverlay}
                           </div>
                         );
                       } else {
-                        // Other file types
                         return (
                           <div
                             key={index}
-                            className="p-3 bg-gray-100 rounded shadow-sm flex items-center justify-between"
+                            className={
+                              commonWrapperClasses +
+                              " p-3 flex items-center justify-between"
+                            }
                           >
                             <span className="text-sm truncate w-4/5">
-                              {file.split("/").pop()}
+                              {file.fileName}
                             </span>
-                            <a
-                              href={file}
-                              download
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-600 text-sm underline"
-                            >
-                              Download
-                            </a>
+                            {iconOverlay}
                           </div>
                         );
                       }

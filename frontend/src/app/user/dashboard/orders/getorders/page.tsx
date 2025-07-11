@@ -1,43 +1,33 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import RatingStar from "@/components/userDashboard/RatingStar";
-import {
-  Eye,
-  Download,
-  Upload,
-  Filter,
-  FileDown,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-import { useRouter } from "next/navigation";
+
+import { Filter, FileDown } from "lucide-react";
+
 import axios from "axios";
+
 import { baseUrl } from "@/config/baseUrl";
-import { PendingOrder as Order } from "@/types/PendingOrder";
 
+import { Order } from "@/types/Order.interface";
 
-import { openJobDescriptionModal } from "@/store/features/ModalSlice";
+import BidModal from "@/components/userDashboard/Bid";
 
-import { AppDispatch } from "@/store/store/store";
-
-import { useDispatch } from "react-redux";
-
+import SeeOrder from "@/components/SeeOrder/SeeOrder";
 
 const Page = () => {
+  const [isToBid, setIsToBid] = useState<boolean>(false);
+
   const [orders, setOrders] = useState<Order[]>([]);
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const dispatch = useDispatch<AppDispatch>()
-
-  const router = useRouter();
+  const [idToBid, setIdToBid] = useState<string>("");
 
   const fetchPendingOrders = async () => {
     try {
       setLoading(true);
       const response = await axios.get<{ success: boolean; data: Order[] }>(
-        `${baseUrl.url}/v1/orders/assignments/pending`
+        `${baseUrl.url}/v1/orders/assignments/unbid`
       );
       setOrders(response?.data?.data || []);
     } catch (error) {
@@ -83,7 +73,6 @@ const Page = () => {
                 "Paper Details",
                 "Charges",
                 "Timeline",
-                "Rating",
                 "BID",
                 "Actions",
               ].map((header, index) => (
@@ -117,7 +106,8 @@ const Page = () => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm font-medium text-gray-900">
-                      {order.paperDetails}
+                      <p>{order.subject}</p>
+                      <p>{order.category}</p>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -130,64 +120,23 @@ const Page = () => {
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600">
                     <div>
-                      Deadline:{" "}
-                      {new Date(order.deadline).toLocaleDateString()}
+                      Deadline: {new Date(order.deadline).toLocaleDateString()}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <RatingStar
-                          key={i}
-                          rating={order.rating || 0}
-                          index={i + 1}
-                        />
-                      ))}
-                      <span className="ml-1 text-xs text-gray-500">
-                        ({order.rating || 0})
-                      </span>
-                    </div>
-                  </td>
+
                   <td>
-                    <button className="px-3 py-1 bg-[#e60000] text-white text-xs font-semibold rounded hover:bg-[#b80000] transition-colors">
+                    <button
+                      onClick={() => {
+                        setIdToBid(order._id);
+                        setIsToBid(true);
+                      }}
+                      className="px-3 py-1 bg-[#e60000] text-white text-xs font-semibold rounded hover:bg-[#b80000] transition-colors"
+                    >
                       BID
                     </button>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() =>
-                          dispatch(openJobDescriptionModal(order))
-                        }
-                        className="text-gray-600 hover:text-[#e60000] transition-colors"
-                        title="View details"
-                      >
-                        <Eye size={18} />
-                      </button>
-                      <button
-                        className="text-gray-600 hover:text-green-600 transition-colors"
-                        title="Download files"
-                        onClick={() => {
-                          order?.files?.forEach((url) => {
-                            const link = document.createElement("a");
-                            link.href = url;
-                            link.target = "_blank";
-                            link.download = url.split("/").pop() || "file.pdf";
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                          });
-                        }}
-                      >
-                        <Download size={18} />
-                      </button>
-                      <button
-                        className="text-gray-600 hover:text-purple-600 transition-colors"
-                        title="Submit revision"
-                      >
-                        <Upload size={18} />
-                      </button>
-                    </div>
+                    <SeeOrder order={order} />
                   </td>
                 </tr>
               ))
@@ -195,6 +144,12 @@ const Page = () => {
           </tbody>
         </table>
       </div>
+      <BidModal
+        isToBid={isToBid}
+        bidId={idToBid}
+        setIsToBid={setIsToBid}
+        fetchPendingOrders={fetchPendingOrders}
+      />
     </div>
   );
 };

@@ -1,18 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Job {
-  id?: string;
-  client?: string;
-  paperDetails?: string;
-  deadline?: string;
-  charges?: number;
-  files?: string[];
-  description?:string
-}
+import { Order } from "@/types/Order.interface";
 
 interface ModalState {
   isOpen: boolean;
-  job: Job | null;
+  job: Order | null;
 }
 
 const initialState: ModalState = {

@@ -1,18 +1,96 @@
 const mongoose = require("mongoose");
-
 const { Schema } = mongoose;
-
 const Counter = require("../counter/counter.model");
 
 const orderSchema = new Schema(
   {
     orderId: { type: String, unique: true },
-    clientName: { type: String, required: true },
-    paperDetails: { type: String, required: true },
-    deadline: { type: Date, required: true },
-    writer: { type: Schema.Types.ObjectId, ref: "User", default: null },
-    assignedAt: { type: Date, default: null },
-    bids: { type: Number, default: 0 },
+
+    clientName: {
+      type: String,
+      required: true,
+    },
+
+    page: {
+      type: String,
+    },
+
+    words: {
+      type: String,
+      required: true,
+    },
+
+    subject: {
+      type: String,
+      required: true,
+    },
+
+    category: {
+      type: String,
+      enum: [
+        "Dissertation",
+        "Technical",
+        "Non technical",
+        "PowerPoint(With Speaker Notes)",
+        "PowerPoint(Without Speaker Notes)",
+        "Undergraduate",
+      ],
+      required: true,
+    },
+
+    deadline: {
+      type: Date,
+      required: true,
+    },
+
+    time: {
+      type: String,
+      required: true,
+    },
+
+    charges: {
+      type: Number,
+      required: true,
+    },
+
+    description: {
+      type: String,
+    },
+
+    files: [
+      {
+        fileName: String,
+        downloadURL: String,
+        _id: false,
+      },
+    ],
+
+    paperDetails: {
+      type: String,
+    },
+
+    assignedAt: {
+      type: Date,
+      default: null,
+    },
+
+    assignedWriter: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
+    bids: {
+      type: Number,
+      default: 0,
+    },
+
+    biddedWriters: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+
     status: {
       type: String,
       enum: [
@@ -25,12 +103,16 @@ const orderSchema = new Schema(
       ],
       default: "Pending",
     },
-    biddedWriters: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    charges: { type: Number, required: true },
-    penalty: { type: Number, default: 0 },
-    files: [{ type: String }],
-    description: { type: String },
-    inRevisionCount: { type: Number, default: 0 },
+
+    penalty: {
+      type: Number,
+      default: 0,
+    },
+
+    inRevisionCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

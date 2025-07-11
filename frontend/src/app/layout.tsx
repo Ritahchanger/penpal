@@ -12,6 +12,8 @@ import MoreContentModal from "@/components/admin/MoreContent/MoreContentModal";
 
 import AdminSidebarProvider from "@/Providers/AdminSidebarProvider";
 
+import { AuthProvider } from "@/context/Authentication/AuthenticationContext";
+
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -27,10 +29,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${outfit.variable} antialiased`}>
         <AdminSidebarProvider>
-          <SidebarProvider>
-            {children}
-            <MoreContentModal />
-          </SidebarProvider>
+          <AuthProvider>
+            <SidebarProvider>
+              {children}
+              <MoreContentModal />
+            </SidebarProvider>
+          </AuthProvider>
         </AdminSidebarProvider>
       </body>
     </html>

@@ -1,44 +1,43 @@
 "use client";
 
-import React from "react";
-import { Eye, UserPlus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { UserPlus } from "lucide-react";
+import axios from "axios";
+import { baseUrl } from "@/config/baseUrl";
+import SeeOrder from "@/components/SeeOrder/SeeOrder";
+import AssignWriterModal from "@/components/admin/AssignWriterModal/AssignWriterModal";
 
 const Page = () => {
-  const router = useRouter();
+  const [orders, setOrders] = useState([]);
+  const [assignModal, setAssignModal] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<string>("");
 
-  const orders = [
-    {
-      id: "ORD-001",
-      client: "John Doe",
-      paperDetails: "Research Proposal - 10 pages",
-      uploadedAt: "2025-06-20 10:30 AM",
-      deadline: "2025-06-27 05:00 PM",
-      workStatus: "Pending",
-      bids: 5,
-      charges: 2500,
-    },
-    {
-      id: "ORD-002",
-      client: "Jane Smith",
-      paperDetails: "Essay - 5 pages",
-      uploadedAt: "2025-06-21 09:00 AM",
-      deadline: "2025-06-25 03:00 PM",
-      workStatus: "In Progress",
-      bids: 3,
-      charges: 1500,
-    },
-    {
-      id: "ORD-003",
-      client: "Michael Kimani",
-      paperDetails: "Thesis Chapter - 20 pages",
-      uploadedAt: "2025-06-22 02:15 PM",
-      deadline: "2025-07-01 11:59 PM",
-      workStatus: "Pending",
-      bids: 8,
-      charges: 6000,
-    },
-  ];
+  useEffect(() => {
+    fetchUnassignedOrders();
+  }, []);
+
+  const fetchUnassignedOrders = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl.url}/v1/orders/assignments/unassigned`
+      );
+      if (response.data.success) {
+        setOrders(response.data.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch unassigned orders:", error);
+    }
+  };
+
+  const handleAssignModal = (orderId: string) => {
+    setSelectedOrder(orderId);
+    setAssignModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedOrder("");
+    setAssignModal(false);
+  };
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md">
@@ -65,6 +64,7 @@ const Page = () => {
                 "BIDS",
                 "CHARGES",
                 "ASSIGN MANUALLY",
+                "",
               ].map((header) => (
                 <th
                   key={header}
@@ -76,28 +76,28 @@ const Page = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100">
-            {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-red-50">
+            {orders.map((order: any) => (
+              <tr key={order._id} className="hover:bg-red-50">
                 <td className="px-6 py-4 font-semibold text-[#e60000]">
-                  {order.id}
+                  {order.orderId}
                 </td>
-                <td className="px-6 py-4">{order.client}</td>
+                <td className="px-6 py-4">{order.clientName}</td>
                 <td className="px-6 py-4">{order.paperDetails}</td>
                 <td className="px-6 py-4 text-sm text-gray-600">
-                  {order.uploadedAt}
+                  {new Date(order.createdAt).toLocaleString()}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-600">
-                  {order.deadline}
+                  {new Date(order.deadline).toLocaleString()}
                 </td>
                 <td className="px-6 py-4">
                   <span
                     className={`text-xs font-medium px-2 py-1 rounded-full ${
-                      order.workStatus === "In Progress"
+                      order.status === "In Progress"
                         ? "bg-blue-100 text-blue-800"
                         : "bg-yellow-100 text-yellow-800"
                     }`}
                   >
-                    {order.workStatus}
+                    {order.status}
                   </span>
                 </td>
                 <td className="px-6 py-4">{order.bids} bids</td>
@@ -109,6 +109,7 @@ const Page = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button
+                    onClick={() => handleAssignModal(order._id)}
                     className="flex items-center gap-2 px-3 py-2 bg-[#e60000] text-white rounded-md text-sm hover:bg-[#cc0000] transition-colors"
                     title="Assign manually"
                   >
@@ -116,11 +117,32 @@ const Page = () => {
                     Assign
                   </button>
                 </td>
+                <td>
+                  <SeeOrder order={order} />
+                </td>
               </tr>
             ))}
+            {orders.length === 0 && (
+              <tr>
+                <td
+                  colSpan={10}
+                  className="text-center text-gray-500 py-6 text-sm"
+                >
+                  No unassigned orders found.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
+
+      {/* ✅ Modal displayed here */}
+      {assignModal && selectedOrder && (
+        <AssignWriterModal
+          orderId={selectedOrder}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
